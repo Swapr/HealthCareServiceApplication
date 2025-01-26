@@ -38,11 +38,9 @@ public class ApplicationUserController {
 	}
 	
 	
-	@GetMapping("/profile/{user}")
-	public ApplicationUser getUSer(@PathVariable String user) {
-		ApplicationUser user1=new ApplicationUser();
-		user1.setUser_name(user);
-		return user1;
+	@GetMapping("/viewprofile/{user1}")
+	public ApplicationUser getUSer(@PathVariable(value = "user1") String user) {
+		return applicationUserService.viewProfile(user);
 	}
 
 }

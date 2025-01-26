@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
@@ -14,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Appointment {
 
 	@Id
+	
     private String booking_id;
     private String disease;
 
@@ -22,6 +24,10 @@ public class Appointment {
 
     private String patientId;
     private Date bookingTime;
+    
+    public Appointment() {
+    	super();
+    }
 
     public Appointment( String disease, Date tentativeDate, String priority, String patientId) {
         super();

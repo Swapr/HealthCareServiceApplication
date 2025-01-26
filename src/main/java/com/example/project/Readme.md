@@ -2,9 +2,9 @@
 
 
 ##progress
-- phase 1 completed implementation of jwt and ApplicationUserService
+- phase 1 completed implementation of jwt and ApplicationUserService.
 
-- phase 2 add appointment and patient service
+- phase 2 completed appointment and patient service.
 
-
+- phase 3 completed unit test build 
 

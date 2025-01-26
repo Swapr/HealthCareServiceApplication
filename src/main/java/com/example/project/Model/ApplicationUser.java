@@ -16,6 +16,8 @@ public class ApplicationUser {
     public String password;
     public String user_mobile;
     public String location;
+    
+    
 
     public ApplicationUser(String user_name, String user_email, String password, String user_mobile, String location) {
         super();

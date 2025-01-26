@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.json.simple.JSONObject;
 
@@ -74,6 +75,20 @@ public class ApplicationUserService {
 		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 		
+		
+	}
+	
+	
+	public ApplicationUser viewProfile(String userid) {
+		try {
+			Optional<ApplicationUser> optional= applicationUserRepository.findById(userid);
+			if(optional.isPresent()) {
+				return optional.get();
+			}
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
 		
 	}
 	
