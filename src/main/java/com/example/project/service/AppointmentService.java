@@ -1,24 +1,21 @@
 package com.example.project.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.project.Model.Appointment;
-import com.example.project.Model.Patient;
 import com.example.project.repository.AppointmentRepository;
-import com.example.project.repository.PatientRepository;
 
 @Service
 public class AppointmentService {
+	
+	private static final Logger LOGGER= LoggerFactory.getLogger(AppointmentService.class);
 
 
 	private AppointmentRepository appointmentRepository;
@@ -30,11 +27,12 @@ public class AppointmentService {
 	
 	public ResponseEntity<String> registerAppointment(Appointment appointment){
 		try {
-			appointment.setBookingTime(new Date());
+			appointment.setBookingTime(new Date());                     
 			appointment.setBooking_id(appointment.getPatientId());
 			appointmentRepository.save(appointment);
 			return ResponseEntity.status(HttpStatus.OK).body("Booking successful");
 		} catch (Exception e) {
+			LOGGER.debug("Booking failure"+e.getMessage()+" "+e.toString());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Booking failure"+e.getMessage());
 		}
 	}

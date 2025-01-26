@@ -1,0 +1,29 @@
+<configuration>
+
+    <!-- Console appender to keep default Spring Boot logs -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Custom appender for your application logs -->
+    <appender name="CUSTOM_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/custom_logs.log</file> <!-- Define the log file location -->
+        <append>false</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Define a logger for your application (e.g., com.example.yourapp) -->
+    <logger name="com.example.project" level="ERROR">
+        <appender-ref ref="CUSTOM_FILE" />
+    </logger>
+
+    <!-- Root logger configuration (keeps default behavior for system logs) -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>
