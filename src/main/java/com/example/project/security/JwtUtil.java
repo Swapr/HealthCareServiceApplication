@@ -2,6 +2,10 @@ package com.example.project.security;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -13,13 +17,24 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtil {
 	
-	private static final String secretKey="swapnil";
+	@Autowired
+	private Environment env;
+	
+	private static  String secretKey;
+	private static long timeout;
+	
+	@PostConstruct
+	public void init() {
+		secretKey=env.getProperty("jwt.secret");
+		timeout=Long.parseLong(env.getProperty("jwt.token.validity"));
+	}
+	
 	
 	public static String generateToken(String username) {
 		return Jwts.builder()
 		    .setSubject(username)
 		    .setIssuedAt(new Date())
-		    .setExpiration(new Date(System.currentTimeMillis()+1200000))
+		    .setExpiration(new Date(System.currentTimeMillis()+timeout))
 		    .signWith(SignatureAlgorithm.HS256, secretKey)
 		    .compact();
 	}
